@@ -25,13 +25,22 @@ maintainers = [
     { name = "Lauri Himanen", email = "lauri.himanen@physik.hu.berlin.de" },
 ]
 license = { file = "LICENSE" }
-dependencies = ["nomad-lab>=1.2.2dev578"]
+dependencies = [
+    "nomad-lab>=1.2.2dev578",
+    'pyzeo==0.1.4',
+    'pymatgen',
+    'ase',
+    'pydantic',
+]
 
 [project.urls]
 Repository = "https://github.com/lauri-codes/nomad-porous-materials"
 
 [project.optional-dependencies]
-dev = ['ruff>=0.3.2', 'pytest']
+dev = [
+    'ruff>=0.3.2',
+    'pytest'
+]
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
@@ -108,7 +117,5 @@ package-dir = {"" = "src"}
 where = ["src"]
 
 [project.entry-points.'nomad.plugin']
-
-
-mynormalizer = "nomad_porous_materials.normalizers:mynormalizer"
-myapp = "nomad_porous_materials.apps:myapp"
+porositynormalizer = "nomad_porous_materials.normalizers:porositynormalizer"
+mofapp = "nomad_porous_materials.apps:mofapp"
