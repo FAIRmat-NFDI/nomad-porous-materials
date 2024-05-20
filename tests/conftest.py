@@ -1,10 +1,10 @@
-from collections import defaultdict
+from collections import defaultdict  # noqa: I001
 
-import runschema
 from nomad.atomutils import Formula
 from nomad.datamodel import EntryArchive, EntryMetadata
 from nomad.datamodel.metainfo.simulation.run import Program, Run
 from nomad.datamodel.metainfo.simulation.system import Atoms, System
+import runschema  # Needs to be imported at the bottom
 
 
 def assert_topology(topology):
