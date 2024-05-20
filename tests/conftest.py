@@ -1,11 +1,10 @@
 from collections import defaultdict
 
+import runschema
 from nomad.atomutils import Formula
 from nomad.datamodel import EntryArchive, EntryMetadata
-from nomad.datamodel.metainfo.simulation.run import Run, Program
+from nomad.datamodel.metainfo.simulation.run import Program, Run
 from nomad.datamodel.metainfo.simulation.system import Atoms, System
-
-import runschema
 
 
 def assert_topology(topology):
@@ -55,7 +54,9 @@ def get_template_for_structure(atoms: Atoms) -> EntryArchive:
         lattice_vectors=atoms.get_cell() * 1e-10,
         periodic=atoms.get_pbc(),
     )
-    system.chemical_composition_hill = Formula(''.join(atoms.get_chemical_symbols())).format('hill')
+    system.chemical_composition_hill = Formula(
+        ''.join(atoms.get_chemical_symbols())
+    ).format('hill')
     archive = EntryArchive(metadata=EntryMetadata(domain='dft'))
     run = Run(program=Program(name='VASP'))
     run.system.append(system)

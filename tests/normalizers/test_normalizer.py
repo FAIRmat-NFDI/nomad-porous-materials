@@ -1,6 +1,7 @@
+from pathlib import Path
+
 import ase.io
 import pytest
-from pathlib import Path
 from nomad.client import normalize_all
 
 from tests.conftest import assert_topology, get_template_for_structure

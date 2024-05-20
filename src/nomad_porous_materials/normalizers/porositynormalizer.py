@@ -120,7 +120,6 @@ class PorosityNormalizer(SystemBasedNormalizer):
         if len(number_of_carbon) == 0 and len(aluminium_silicon) == 0:
             return
 
-
         try:
             porosity_data = zeo_calculation(atoms)
         except Exception:
