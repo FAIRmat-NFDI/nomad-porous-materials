@@ -1,5 +1,6 @@
-import ase
+import ase.io
 import pytest
+from pathlib import Path
 from nomad.client import normalize_all
 
 from tests.conftest import assert_topology, get_template_for_structure
@@ -8,13 +9,13 @@ from tests.conftest import assert_topology, get_template_for_structure
 @pytest.mark.parametrize(
     'filepath',
     [
-        'tests/data/normalizers/porous_systems/COF-1.cif',
-        'tests/data/normalizers/porous_systems/IRR.cif',
-        'tests/data/normalizers/porous_systems/SARSUC.cif',
+        '../data/COF-1.cif',
+        '../data/IRR.cif',
+        '../data/SARSUC.cif',
     ],
 )
 def test_porosity(filepath):
-    atoms = ase.io.read(filepath)
+    atoms = ase.io.read(Path(__file__).parent / filepath)
     archive = get_template_for_structure(atoms)
     normalize_all(archive)
 
@@ -36,13 +37,13 @@ def test_porosity(filepath):
 @pytest.mark.parametrize(
     'filepath',
     [
-        'tests/data/normalizers/mofs/EDUSIF.cif',
-        'tests/data/normalizers/mofs/RUBTAK01.cif',
-        'tests/data/normalizers/mofs/SARSUC.cif',
+        '../data/EDUSIF.cif',
+        '../data/RUBTAK01.cif',
+        '../data/SARSUC.cif',
     ],
 )
 def test_mof(filepath):
-    atoms = ase.io.read(filepath)
+    atoms = ase.io.read(Path(__file__).parent / filepath)
     archive = get_template_for_structure(atoms)
     normalize_all(archive)
 

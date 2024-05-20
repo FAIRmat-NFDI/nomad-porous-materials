@@ -27,7 +27,7 @@ maintainers = [
 license = { file = "LICENSE" }
 dependencies = [
     "nomad-lab>=1.2.2dev578",
-    'pyzeo==0.1.4',
+    'pyzeo==0.1.5',
     'pymatgen',
     'ase',
     'pydantic',
@@ -130,5 +130,5 @@ package-dir = {"" = "src"}
 where = ["src"]
 
 [project.entry-points.'nomad.plugin']
-#porositynormalizer = "nomad_porous_materials.normalizers:porositynormalizer"
+porositynormalizer = "nomad_porous_materials.normalizers:porositynormalizer"
 #mofapp = "nomad_porous_materials.apps:mofapp"
