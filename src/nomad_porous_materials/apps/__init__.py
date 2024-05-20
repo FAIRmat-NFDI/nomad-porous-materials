@@ -74,6 +74,7 @@ mofapp = AppEntryPoint(
         dashboard=Dashboard(
             widgets=[
                 WidgetPeriodicTable(
+                    type='periodictable',
                     layout={
                         'lg': Layout(h=9, w=15, x=0, y=0),
                         'md': Layout(h=8, w=11, x=0, y=0),
@@ -85,6 +86,7 @@ mofapp = AppEntryPoint(
                     scale='linear',
                 ),
                 WidgetTerms(
+                    type='terms',
                     layout={
                         'lg': Layout(h=9, w=9, x=15, y=0),
                         'md': Layout(h=8, w=7, x=11, y=0),
@@ -98,6 +100,7 @@ mofapp = AppEntryPoint(
                     showinput=True,
                 ),
                 WidgetHistogram(
+                    type='histogram',
                     layout={
                         'lg': Layout(h=5, w=12, x=0, y=9),
                         'md': Layout(h=4, w=9, x=0, y=8),
@@ -111,6 +114,7 @@ mofapp = AppEntryPoint(
                     showinput=True,
                 ),
                 WidgetHistogram(
+                    type='histogram',
                     layout={
                         'lg': Layout(h=5, w=12, x=0, y=14),
                         'md': Layout(h=4, w=9, x=9, y=8),
@@ -124,6 +128,7 @@ mofapp = AppEntryPoint(
                     showinput=True,
                 ),
                 WidgetHistogram(
+                    type='histogram',
                     layout={
                         'lg': Layout(h=5, w=12, x=11, y=9),
                         'md': Layout(h=4, w=9, x=0, y=12),
@@ -137,6 +142,7 @@ mofapp = AppEntryPoint(
                     showinput=True,
                 ),
                 WidgetHistogram(
+                    type='histogram',
                     layout={
                         'lg': Layout(h=5, w=12, x=11, y=14),
                         'md': Layout(h=4, w=9, x=9, y=12),
