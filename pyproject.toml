@@ -117,5 +117,5 @@ package-dir = {"" = "src"}
 where = ["src"]
 
 [project.entry-points.'nomad.plugin']
-porositynormalizer = "nomad_porous_materials.normalizers:porositynormalizer"
-mofapp = "nomad_porous_materials.apps:mofapp"
+#porositynormalizer = "nomad_porous_materials.normalizers:porositynormalizer"
+#mofapp = "nomad_porous_materials.apps:mofapp"
