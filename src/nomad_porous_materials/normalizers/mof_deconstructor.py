@@ -16,19 +16,20 @@
 # limitations under the License.
 #
 
-from ase import neighborlist, geometry
-from ase.data import chemical_symbols, covalent_radii, atomic_numbers
-from pymatgen.io.ase import AseAtomsAdaptor
+from ase import geometry, neighborlist
+from ase.data import atomic_numbers, chemical_symbols, covalent_radii
+from nomad.datamodel.results import Coordination
 from pymatgen.analysis.graphs import StructureGraph
 from pymatgen.analysis.local_env import JmolNN
-from nomad.datamodel.results import Coordination
+from pymatgen.io.ase import AseAtomsAdaptor
 
 """
 Function for deconstructing MOFs into building units
 There are three types of building units
 1) The organic linkers, which contains the all atoms of the organic ligands
 2) The metal ase_atom, which contains the metal cluster found in the MOF
-3) The organic ase_atom, which is the fragment of the organic linker cut at the point of extension
+3) The organic ase_atom, which is the fragment of the organic linker cut at the
+   point of extension
 """
 
 
@@ -73,7 +74,8 @@ def transition_metals():
 
 def inter_atomic_distance_check(ase_atom):
     """
-    Check that no two atoms are within a distance of 1.0 Amstrong unless it is an X-H bond
+    Check that no two atoms are within a distance of 1.0 Amstrong unless it is
+    an X-H bond.
 
     As simple script to convert from ase atom object to pybel
     Parameters
@@ -248,7 +250,8 @@ def dfsutil_graph_method(graph, temp, node, visited):
     -----------
     graph: any python dictionary
     temp: a python list to hold nodes that have been visited
-    node: a key in the python dictionary (graph), which is used as the starting or root node
+    node: a key in the python dictionary (graph), which is used as the starting
+        or root node
     visited: python list containing nodes that have been traversed.
     Returns
     -------
@@ -272,11 +275,14 @@ def longest_list(lst):
 def remove_unbound_guest(ase_atom):
     """
     A simple script to remove guest from a metal organic framework.
-    1)It begins by computing a connected graph component of all the fragments in the system
+    1) It begins by computing a connected graph component of all the fragments
+       in the system
     using ASE neighbour list.
     2) Secondly it selects indicies of connected components which contain a metal
-    3)if the there are two or more components, we create a pytmagen graph for each components and filter out all components that are not polymeric
-    4) If there are two or more polymeric components, we check wether these systems there are identical or different
+    3) If the there are two or more components, we create a pytmagen graph for
+       each components and filter out all components that are not polymeric
+    4) If there are two or more polymeric components, we check wether these
+       systems there are identical or different
     and select only unique polymeric components
 
     Parameters:
@@ -329,7 +335,9 @@ def remove_unbound_guest(ase_atom):
 
 def connected_components(graph):
     """
-    Find the connected fragments in a graph. Should work for any graph defined as a dictionary
+    Find the connected fragments in a graph. Should work for any graph defined
+    as a dictionary
+
     Parameters:
     -----------
     A graph in the form of dictionary
@@ -485,15 +493,17 @@ def move2front(index_value, coords):
 
 def mof_regions(ase_atom, list_of_connected_components, atom_pairs_at_breaking_point):
     """
-    A function to map all atom indices to exact position in which the find themselves in the MOF.
-    This function is used to partition a MOF into regions that correspond to unique
-    unique building units.
+    A function to map all atom indices to exact position in which the find
+    themselves in the MOF. This function is used to partition a MOF into regions
+    that correspond to unique unique building units.
 
     Parameters:
     -----------
     ase_atom: ASE atom
-    list_of_connected_components : list of list, wherein each list correspond to atom indices of a specific building unit
-    atom_pairs_at_breaking_point: dictionary containing pairs of atoms from which the bonds were broken
+    list_of_connected_components : list of list, wherein each list correspond to
+        atom indices of a specific building unit
+    atom_pairs_at_breaking_point: dictionary containing pairs of atoms from
+        which the bonds were broken
 
     Returns
     -------
@@ -776,16 +786,19 @@ def secondary_building_units(ase_atom):
        Cut at the position between the carboxylate carbon and the adjecent carbon.
     2) Find all Nitrogen connected to metal. Check whether the nitrogen is in the
        centre of a porphirin ring. If no, cut at nitrogen metal bond.
-    3) Look for oxygen that is connected to metal and two carbon. cut at metal oxygen bond
+    3) Look for oxygen that is connected to metal and two carbon. cut at metal
+       oxygen bond
     Parameters:
     -----------
     ase_atom: ASE atom
 
     Returns
     -------
-     list_of_connected_components : list of connected components, in which each list contains atom indices
+     list_of_connected_components : list of connected components, in which each
+        list contains atom indices
      atom_pairs_at_breaking_point  : Dictionary containing point of disconnection
-     Porphyrin_checker : Boolean showing whether the metal is in the centre of a porpherin
+     Porphyrin_checker : Boolean showing whether the metal is in the centre of a
+        porpherin
      Regions : Dictionary of regions.
     """
     atom_pairs_at_breaking_point = {}
@@ -1006,7 +1019,15 @@ def secondary_building_units(ase_atom):
             seen = seen_phosphorous + sum(list(all_phosphites.values()), [])
             if atoms not in seen:
                 connected = graph[atoms]
-                # not_connected_to_metal_or_hygrogen = [[i for i in graph[j] if ase_atom[i].symbol not in transition_metals() or ase_atom[i].symbol != 'H'] for j in connected]
+                # not_connected_to_metal_or_hygrogen = [
+                #     [
+                #         i
+                #         for i in graph[j]
+                #         if ase_atom[i].symbol not in transition_metals()
+                #         or ase_atom[i].symbol != 'H'
+                #     ]
+                #     for j in connected
+                # ]
 
                 metal_oxy = [
                     [i for i in graph[j] if ase_atom[i].symbol in transition_metals()]
@@ -1117,10 +1138,12 @@ def ligands_and_metal_clusters(ase_atom):
 
     Returns
     -------
-    list_of_connected_components  : list of connected components, in which each list contains atom indices
-     atom_pairs_at_breaking_point  : Dictionary containing point of disconnection
-     Porpyrin_checker : Boolean showing whether the metal is in the centre of a porpherin
-     Regions : Dictionary of regions.
+    list_of_connected_components: list of connected components, in which each
+        list contains atom indices
+     atom_pairs_at_breaking_point: Dictionary containing point of disconnection
+     Porpyrin_checker : Boolean showing whether the metal is in the centre of a
+        porpherin
+     Regions: Dictionary of regions.
     """
     graph, bond_matrix = compute_ase_neighbour(ase_atom)
     porphyrin_checker = metal_in_porphyrin2(ase_atom, graph)
@@ -1597,8 +1620,9 @@ def find_unique_building_units(
         if len(metal) > 0:
             graph_sbu, _ = compute_ase_neighbour(molecule_to_write)
             """
-            Check whether the metal sbu is a rod mof. If is it is rod mof,
-            we rotate and aligne the sbu such that the axis of rotation will be the a-axis.
+            Check whether the metal sbu is a rod mof. If is it is rod mof, we
+            rotate and aligne the sbu such that the axis of rotation will be the
+            a-axis.
             """
             if len(is_rodlike(molecule_to_write, graph_sbu)) == 1:
                 molecule_to_write.info['sbu_type'] = 'rodlike'
@@ -1651,7 +1675,8 @@ def metal_coordination_number(ase_atom):
 
 def wrap_systems_in_unit_cell(ase_atom, max_iter=30, skin=0.3):
     """
-    A simple aglorithm to reconnnect all atoms wrapped in a periodic boundary condition such that all atoms outside the box will appear reconnected.
+    A simple algorithm to reconnnect all atoms wrapped in a periodic boundary
+    condition such that all atoms outside the box will appear reconnected.
     """
     new_position = geometry.wrap_positions(
         ase_atom.positions,

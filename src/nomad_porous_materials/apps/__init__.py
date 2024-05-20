@@ -7,11 +7,11 @@ from nomad.config.models.ui import (
     FilterMenu,
     FilterMenus,
     Filters,
+    Layout,
     SearchSyntaxes,
     WidgetHistogram,
     WidgetPeriodicTable,
     WidgetTerms,
-    Layout
 )
 
 mofapp = AppEntryPoint(
@@ -21,20 +21,16 @@ mofapp = AppEntryPoint(
         label='Metal-Organic Frameworks',
         path='mofs',
         description='Search metal-organic frameworks (MOFs)',
-        readme='''
+        readme="""
             This page allows you to search **metal-organic framework
             (MOF) data** within NOMAD. The filter menu on the left
             and the shown default columns are specifically designed
             for MOF exploration. The dashboard directly shows useful
-            interactive statistics about the data.''',
+            interactive statistics about the data.""",
         category='Use Cases',
-        filters=Filters(
-            exclude=['mainfile', 'entry_name', 'combine']
-        ),
+        filters=Filters(exclude=['mainfile', 'entry_name', 'combine']),
         filters_locked={'results.material.topology.label': 'MOF'},
-        search_syntaxes=SearchSyntaxes(
-            exclude=['free_text']
-        ),
+        search_syntaxes=SearchSyntaxes(exclude=['free_text']),
         columns=Columns(
             selected=['results.material.chemical_formula_iupac', 'mainfile', 'authors'],
             options={
@@ -86,7 +82,7 @@ mofapp = AppEntryPoint(
                         'xxl': Layout(h=10, w=25, x=0, y=0),
                     },
                     quantity='results.material.elements',
-                    scale='linear'
+                    scale='linear',
                 ),
                 WidgetTerms(
                     layout={
@@ -154,6 +150,6 @@ mofapp = AppEntryPoint(
                     showinput=True,
                 ),
             ]
-        )
-    )
+        ),
+    ),
 )

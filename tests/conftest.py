@@ -43,14 +43,15 @@ def assert_topology(topology):
     for key in child_map.keys():
         assert child_map[key] == child_map_determined[key]
 
+
 def get_template_for_structure(atoms: Atoms) -> EntryArchive:
     system = System()
     system.atoms = Atoms(
-		positions=atoms.get_positions() * 1e-10,
-		labels=atoms.get_chemical_symbols(),
-		lattice_vectors=atoms.get_cell() * 1e-10,
-		periodic=atoms.get_pbc(),
-	)
+        positions=atoms.get_positions() * 1e-10,
+        labels=atoms.get_chemical_symbols(),
+        lattice_vectors=atoms.get_cell() * 1e-10,
+        periodic=atoms.get_pbc(),
+    )
     archive = EntryArchive()
     run = Run()
     run.system.append(system)

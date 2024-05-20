@@ -17,12 +17,10 @@
 #
 import os
 import re
-from typing import Dict
 
 import numpy as np
 from nomad.config import config
 from nomad.datamodel.results import Material, Relation, System
-from nomad_porous_materials.normalizers import mof_deconstructor
 from nomad.normalizing.common import ase_atoms_from_nomad_atoms
 from nomad.normalizing.normalizer import SystemBasedNormalizer
 from nomad.normalizing.topology import (
@@ -35,8 +33,12 @@ from pymatgen.io.ase import AseAtomsAdaptor
 from pyzeo.area_volume import surface_area, volume
 from pyzeo.netstorage import AtomNetwork
 
+from nomad_porous_materials.normalizers import mof_deconstructor
+
 species_re = re.compile(r'^([A-Z][a-z]?)(\d*)$')
-configuration = config.get_plugin_entry_point('nomad_porous_materials.normalizers:porositynormalizer')
+configuration = config.get_plugin_entry_point(
+    'nomad_porous_materials.normalizers:porositynormalizer'
+)
 
 
 class PorosityNormalizer(SystemBasedNormalizer):
@@ -50,10 +52,10 @@ class PorosityNormalizer(SystemBasedNormalizer):
     can be relevant for automatic building of hypthetical MOFs
     2) The organic linkers are relevant for understanding the chemistry of the MOF
 
-    Moreover, the normalizer also performs a geometrical analysis of the MOF
-    and provides information regarding the porosity. These are the accessible surface area,
-    pore limiting diamter (pld), local cavity diamter (lcd), accessible volume (AV),
-    number of channels and void fraction.
+    Moreover, the normalizer also performs a geometrical analysis of the MOF and
+    provides information regarding the porosity. These are the accessible
+    surface area, pore limiting diamter (pld), local cavity diamter (lcd),
+    accessible volume (AV), number of channels and void fraction.
 
     In the future, the it will also compute the rcsr tological code.
     """
@@ -82,7 +84,7 @@ class PorosityNormalizer(SystemBasedNormalizer):
         if len(system.atoms.positions) != len(system.atoms.labels):
             return
 
-        topology: Dict[str, System] = {}
+        topology: dict[str, System] = {}
         original_atoms = ase_atoms_from_nomad_atoms(system.atoms)
 
         # TODO: We enforce full periodicity for the system because the GULP
@@ -364,7 +366,7 @@ def get_contents(filename):
     Return:
         list of lines
     """
-    with open(filename, 'r', encoding='utf-8') as f:
+    with open(filename, encoding='utf-8') as f:
         contents = f.readlines()
     return contents
 
@@ -377,9 +379,9 @@ def zeo_calculation(
     The focus here is on MOF, but the script can run on any porous periodic
     system. The script computes the accesible surface area, accessible volume
     and the pore geometry. There are many more outputs which can be extracted
-    from ,vol_str and sa_str. Moreover there are also other computation that can be done.
-    Check out the test directory in dependencies/pyzeo/test. Else contact bafgreat@gmail.com
-    if you need more output and can't figure it out.
+    from ,vol_str and sa_str. Moreover there are also other computation that can
+    be done.  Check out the test directory in dependencies/pyzeo/test. Else
+    contact bafgreat@gmail.com if you need more output and can't figure it out.
     Main parameter:
         ase_atom: ase atom object
         probe_radius: The radius of the probe. Here 1.86 is used as default
@@ -390,10 +392,11 @@ def zeo_calculation(
         1) Accessible volume void fraction
         2) Accessible volume (A^3)
         3) Accessible surface area (A^2)
-        4) Number_of_channels: Number of channels present in the porous system, which correspond to the number of
-                               pores within the system
-        5) LCD_A: The largest cavity diameter is the largest sphere that can be inserted in a porous
-                  system without overlapping with any of the atoms in the system.
+        4) Number_of_channels: Number of channels present in the porous system,
+           which correspond to the number of pores within the system
+        5) LCD_A: The largest cavity diameter is the largest sphere that can be
+           inserted in a porous system without overlapping with any of the atoms
+           in the system.
         6) lfpd_A:The largest included sphere along free sphere path is
                   largest sphere that can be inserted in the pore
         7) PLD_A:The pore limiting diameter is the largest sphere that can freely

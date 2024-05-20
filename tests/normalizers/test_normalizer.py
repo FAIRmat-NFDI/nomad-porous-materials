@@ -1,6 +1,5 @@
 import ase
 import pytest
-
 from nomad.client import normalize_all
 
 from tests.conftest import assert_topology, get_template_for_structure

@@ -20,9 +20,15 @@ from pydantic import Field
 
 
 class PorosityNormalizerEntryPoint(NormalizerEntryPoint):
-    min_n_atoms: int = Field(20, description='Minimum number of atoms allowed for running the normalizer.')
-    max_n_atoms: int = Field(5000, description='Maximum number of atoms allowed for running the normalizer.')
-    min_pld: int = Field(1.86, description='Minimum pore limiting diameter for running the normalizer.')
+    min_n_atoms: int = Field(
+        20, description='Minimum number of atoms allowed for running the normalizer.'
+    )
+    max_n_atoms: int = Field(
+        5000, description='Maximum number of atoms allowed for running the normalizer.'
+    )
+    min_pld: int = Field(
+        1.86, description='Minimum pore limiting diameter for running the normalizer.'
+    )
 
     def load(self):
         from nomad_porous_materials.normalizers.porositynormalizer import (
@@ -34,5 +40,8 @@ class PorosityNormalizerEntryPoint(NormalizerEntryPoint):
 
 porositynormalizer = PorosityNormalizerEntryPoint(
     name='PorosityNormalizer',
-    description='Normalizer that automatically extracts properties from porous materials.',
+    description="""
+        Normalizer that automatically extracts properties from porous
+        materials.
+    """,
 )
