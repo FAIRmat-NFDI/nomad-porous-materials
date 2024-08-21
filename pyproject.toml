@@ -27,7 +27,7 @@ maintainers = [
 license = { file = "LICENSE" }
 dependencies = [
     "nomad-lab>=1.2.2dev578",
-    'pyzeo==0.1.5',
+    'pyzeo==0.1.6',
     'pymatgen',
     'ase',
     'pydantic',
