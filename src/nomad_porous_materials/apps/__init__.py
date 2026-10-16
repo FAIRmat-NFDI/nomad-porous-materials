@@ -78,7 +78,7 @@ mofapp = AppEntryPoint(
                     layout={
                         'lg': Layout(h=9, w=15, x=0, y=0),
                         'md': Layout(h=8, w=11, x=0, y=0),
-                        'sm': Layout(h=6, w=9, x=0, y=0),
+                        'sm': Layout(h=8, w=12, x=0, y=0),
                         'xl': Layout(h=9, w=19, x=0, y=0),
                         'xxl': Layout(h=10, w=25, x=0, y=0),
                     },
@@ -90,7 +90,7 @@ mofapp = AppEntryPoint(
                     layout={
                         'lg': Layout(h=9, w=9, x=15, y=0),
                         'md': Layout(h=8, w=7, x=11, y=0),
-                        'sm': Layout(h=6, w=3, x=9, y=0),
+                        'sm': Layout(h=5, w=12, x=0, y=32),
                         'xl': Layout(h=9, w=11, x=19, y=0),
                         'xxl': Layout(h=10, w=11, x=25, y=0),
                     },
@@ -104,7 +104,7 @@ mofapp = AppEntryPoint(
                     layout={
                         'lg': Layout(h=5, w=12, x=0, y=9),
                         'md': Layout(h=4, w=9, x=0, y=8),
-                        'sm': Layout(h=3, w=6, x=0, y=6),
+                        'sm': Layout(h=6, w=12, x=0, y=8),
                         'xl': Layout(h=5, w=15, x=0, y=9),
                         'xxl': Layout(h=6, w=19, x=0, y=10),
                     },
@@ -118,7 +118,7 @@ mofapp = AppEntryPoint(
                     layout={
                         'lg': Layout(h=5, w=12, x=0, y=14),
                         'md': Layout(h=4, w=9, x=9, y=8),
-                        'sm': Layout(h=3, w=6, x=6, y=6),
+                        'sm': Layout(h=6, w=12, x=6, y=14),
                         'xl': Layout(h=5, w=15, x=0, y=14),
                         'xxl': Layout(h=6, w=17, x=19, y=10),
                     },
@@ -132,7 +132,7 @@ mofapp = AppEntryPoint(
                     layout={
                         'lg': Layout(h=5, w=12, x=11, y=9),
                         'md': Layout(h=4, w=9, x=0, y=12),
-                        'sm': Layout(h=3, w=6, x=0, y=9),
+                        'sm': Layout(h=6, w=12, x=0, y=20),
                         'xl': Layout(h=5, w=15, x=15, y=9),
                         'xxl': Layout(h=6, w=19, x=0, y=16),
                     },
@@ -146,7 +146,7 @@ mofapp = AppEntryPoint(
                     layout={
                         'lg': Layout(h=5, w=12, x=11, y=14),
                         'md': Layout(h=4, w=9, x=9, y=12),
-                        'sm': Layout(h=3, w=6, x=6, y=9),
+                        'sm': Layout(h=6, w=12, x=0, y=26),
                         'xl': Layout(h=5, w=15, x=15, y=14),
                         'xxl': Layout(h=6, w=17, x=19, y=16),
                     },
